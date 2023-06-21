@@ -67,7 +67,7 @@ export default function Footer() {
           justify={"center"}
           align={"center"}
         >
-          <Text>© 2022 Chakra Templates. All rights reserved</Text>
+          <Text>© 2023 Symphony Stock. All rights reserved</Text>
         </Container>
       </Box>
     </Box>
