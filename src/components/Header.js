@@ -9,6 +9,7 @@ import {
   Icon,
   useColorModeValue,
   createIcon,
+  Link,
 } from "@chakra-ui/react";
 
 export default function CallToActionWithAnnotation() {
@@ -33,15 +34,20 @@ export default function CallToActionWithAnnotation() {
             fontSize={{ base: "2xl", sm: "4xl", md: "6xl" }}
             lineHeight={"110%"}
           >
-            Make money from <br />
+            "A well-managed stock is like a symphony, with each product playing
+            its part in harmony to create a " <br />
             <Text as={"span"} color={"green.400"}>
-              your audience
+              profitable melody.
             </Text>
           </Heading>
           <Text color={"gray.500"}>
-            Monetize your content by charging your most loyal readers and reward
-            them loyalty points. Give back to your loyal readers by granting
-            them access to your pre-releases and sneak-peaks.
+            "Welcome to Symphony Stock, your ultimate solution for
+            seamless product stock management. Our cutting-edge platform offers
+            comprehensive tools and features to help you effectively track,
+            manage, and optimize your inventory. With our user-friendly
+            interface and robust functionality, you'll have complete control
+            over your stock levels, ensuring availability, reducing stockouts,
+            and maximizing profitability."
           </Text>
           <Stack
             direction={"column"}
@@ -50,17 +56,19 @@ export default function CallToActionWithAnnotation() {
             alignSelf={"center"}
             position={"relative"}
           >
-            <Button
-              colorScheme={"green"}
-              bg={"green.400"}
-              rounded={"full"}
-              px={6}
-              _hover={{
-                bg: "green.500",
-              }}
-            >
-              Get Started
-            </Button>
+            <Link href="/stock">
+              <Button
+                colorScheme={"green"}
+                bg={"green.400"}
+                rounded={"full"}
+                px={6}
+                _hover={{
+                  bg: "green.500",
+                }}
+              >
+                Get Started
+              </Button>
+            </Link>
             <Button variant={"link"} colorScheme={"blue"} size={"sm"}>
               Learn more
             </Button>
@@ -81,7 +89,7 @@ export default function CallToActionWithAnnotation() {
                 top={"-15px"}
                 transform={"rotate(10deg)"}
               >
-                Starting at $15/mo
+                Starting your product lists
               </Text>
             </Box>
           </Stack>
