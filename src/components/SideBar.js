@@ -14,21 +14,12 @@ import {
   BoxProps,
   FlexProps,
 } from "@chakra-ui/react";
-import {
-  FiHome,
-  FiTrendingUp,
-  FiCompass,
-  FiStar,
-  FiSettings,
-  FiMenu,
-} from "react-icons/fi";
+import { FiHome, FiEdit, FiTruck, FiMenu } from "react-icons/fi";
 
 const LinkItems = [
   { name: "Home", icon: FiHome },
-  { name: "Trending", icon: FiTrendingUp },
-  { name: "Explore", icon: FiCompass },
-  { name: "Favourites", icon: FiStar },
-  { name: "Settings", icon: FiSettings },
+  { name: "Export", icon: FiTruck },
+  { name: "Edit", icon: FiEdit },
 ];
 
 export default function Sidebar({ children }) {
@@ -37,7 +28,7 @@ export default function Sidebar({ children }) {
     <Box>
       <SidebarContent
         onClose={() => onClose}
-        display={{ base: "none", md: "block" }}
+        display={{ base: "none", sm: "block" }}
       />
     </Box>
   );
@@ -50,7 +41,6 @@ const SidebarContent = ({ onClose, ...rest }) => {
       borderRight="1px"
       borderRightColor={useColorModeValue("gray.200", "gray.700")}
       w={{ base: "full", md: 60 }}
-      pos="fixed"
       h="100%"
       {...rest}
     >

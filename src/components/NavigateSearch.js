@@ -18,6 +18,7 @@ import {
   Input,
 } from "@chakra-ui/react";
 import { MoonIcon, SunIcon } from "@chakra-ui/icons";
+import CreateNewProduct from "./CreateNewProduct";
 
 const NavLink = ({ children }) => (
   <Link
@@ -51,8 +52,8 @@ export default function NavigationSearch() {
 
           <Flex alignItems={"center"}>
             <Stack direction={"row"} spacing="30px">
-              <Input type="search" placeholder="Search" />
-              <Button w="70%" onClick={toggleColorMode}>+ Create New Product</Button>
+              <CreateNewProduct />
+
               <Button onClick={toggleColorMode}>
                 {colorMode === "light" ? <MoonIcon /> : <SunIcon />}
               </Button>
