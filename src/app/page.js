@@ -1,0 +1,15 @@
+"use client";
+import "../app/globals.css";
+import Header from "../app/components/Header";
+import Footer from "../app/components/Footer";
+import NavigationBar from "../app/components/NavigateBar";
+
+export default function Home() {
+  return (
+    <>
+      <NavigationBar />
+      <Header />
+      <Footer />
+    </>
+  );
+}

@@ -1,3 +1,4 @@
+"use client";
 import Head from "next/head";
 import {
   Box,
@@ -8,26 +9,23 @@ import {
   Stack,
   Icon,
   useColorModeValue,
+  useColorMode,
   createIcon,
   Link,
 } from "@chakra-ui/react";
 
 export default function CallToActionWithAnnotation() {
+  const { colorMode, toggleColorMode } = useColorMode();
   return (
     <>
-      <Head>
-        <link
-          href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&display=swap"
-          rel="stylesheet"
-        />
-      </Head>
+      <Head></Head>
 
       <Container maxW={"3xl"} mb={20}>
         <Stack
           as={Box}
           textAlign={"center"}
           spacing={{ base: 8, md: 14 }}
-          py={{ base: 20, md: 36 }}
+          py={{ base: 20, md: 10 }}
         >
           <Heading
             fontWeight={600}
@@ -41,8 +39,8 @@ export default function CallToActionWithAnnotation() {
             </Text>
           </Heading>
           <Text color={"gray.500"}>
-            "Welcome to Symphony Stock, your ultimate solution for
-            seamless product stock management. Our cutting-edge platform offers
+            "Welcome to Symphony Stock, your ultimate solution for seamless
+            product stock management. Our cutting-edge platform offers
             comprehensive tools and features to help you effectively track,
             manage, and optimize your inventory. With our user-friendly
             interface and robust functionality, you'll have complete control
@@ -58,8 +56,8 @@ export default function CallToActionWithAnnotation() {
           >
             <Link href="/stock">
               <Button
-                colorScheme={"green"}
-                bg={"green.400"}
+                bg={"green.500"}
+                color={colorMode === "light" ? "gray.700" : "white"}
                 rounded={"full"}
                 px={6}
                 _hover={{
