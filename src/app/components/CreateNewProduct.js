@@ -1,3 +1,4 @@
+"use client";
 import {
   Modal,
   ModalOverlay,
@@ -12,15 +13,11 @@ import {
   Input,
   Button,
   Box,
+  Text,
 } from "@chakra-ui/react";
 import React, { useState } from "react";
-import { createClient } from "@supabase/supabase-js";
-const supabaseUrl = "https://sohnghitinghpxytqtjf.supabase.co";
-const supabaseKey =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNvaG5naGl0aW5naHB4eXRxdGpmIiwicm9sZSI6ImFub24iLCJpYXQiOjE2ODc1MTYzMDgsImV4cCI6MjAwMzA5MjMwOH0.GMUSjHC20jLb-g1fW4O4rIBDrPwf8VbYFG-x6SQXkKs";
-const supabase = createClient(supabaseUrl, supabaseKey);
 
-export default function CreateNewProduct() {
+export default function CreateNewProduct({ data, handlerUpdatedData }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [product, setProduct] = useState("");
   const [amount, setAmount] = useState("");
@@ -52,24 +49,20 @@ export default function CreateNewProduct() {
 
   const handlerSave = async (event) => {
     event.preventDefault();
-    try {
-      const { data, error } = await supabase.from("products").insert([
-        {
-          product_name: product,
-          amount: amount,
-          description: description,
-        },
-      ]);
-      if (data) {
-        console.log("Product saved successfully!");
-      } else {
-        console.error("Failed to save product");
-      }
-
-      onClose();
-    } catch (error) {
-      console.error("error: ", error);
-    }
+    const newData = {
+      id: data.length + 1,
+      product_name: product,
+      amount: amount + "pcs",
+      description,
+      image,
+    };
+    data = [...data, newData];
+    handlerUpdatedData(data);
+    setProduct("");
+    setAmount("");
+    setDescription("");
+    setImage(null);
+    onClose();
   };
 
   return (
@@ -134,7 +127,7 @@ export default function CreateNewProduct() {
                 </Button>
                 {image ? (
                   <Box>
-                    <span>{` : ${image.name}`}</span>
+                    <Text>{` : ${image.name}`}</Text>
                     <Button
                       ml={2}
                       size="sm"
@@ -145,20 +138,14 @@ export default function CreateNewProduct() {
                     </Button>
                   </Box>
                 ) : (
-                  <span>No file chosen</span>
+                  <Text>No file chosen</Text>
                 )}
               </Box>
             </FormControl>
           </ModalBody>
 
           <ModalFooter>
-            <Button
-              colorScheme="blue"
-              mr={3}
-              onClick={(e) => {
-                handlerSave(e);
-              }}
-            >
+            <Button colorScheme="blue" mr={3} onClick={handlerSave}>
               Save
             </Button>
             <Button onClick={onClose}>Cancel</Button>

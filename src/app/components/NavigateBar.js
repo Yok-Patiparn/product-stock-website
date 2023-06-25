@@ -1,4 +1,6 @@
-import { ReactNode } from "react";
+"use client";
+
+import React, { ReactNode } from "react";
 import {
   Box,
   Flex,
@@ -15,7 +17,9 @@ import {
   Stack,
   useColorMode,
   Center,
+  Text,
 } from "@chakra-ui/react";
+import { HiUser } from "react-icons/hi";
 import { MoonIcon, SunIcon } from "@chakra-ui/icons";
 
 const NavLink = ({ children }) => (
@@ -61,22 +65,16 @@ export default function NavigationBar() {
                   cursor={"pointer"}
                   minW={0}
                 >
-                  <Avatar
-                    size={"sm"}
-                    src={"https://avatars.dicebear.com/api/male/username.svg"}
-                  />
+                  <Avatar size={"sm"} src={HiUser} />
                 </MenuButton>
                 <MenuList alignItems={"center"}>
                   <br />
                   <Center>
-                    <Avatar
-                      size={"2xl"}
-                      src={"https://avatars.dicebear.com/api/male/username.svg"}
-                    />
+                    <Avatar src={HiUser} />
                   </Center>
                   <br />
                   <Center>
-                    <p>Username</p>
+                    <Text>Username</Text>
                   </Center>
                   <br />
                   <MenuDivider />

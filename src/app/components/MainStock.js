@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useState, useEffect } from "react";
 import {
   Accordion,
@@ -16,57 +18,21 @@ import {
   Image,
 } from "@chakra-ui/react";
 import { ChevronDownIcon } from "@chakra-ui/icons";
-import jsonData from "../pages/stock/MOCK_DATA.json";
 
-const MainStock = () => {
-  const [searchMessage, setSearchMessage] = useState("");
-  const [filteredData, setFilteredData] = useState(jsonData);
-  console.log(filteredData);
-  const data = jsonData;
+const MainStock = ({ filteredData, filterData }) => {
   const { colorMode, toggleColorMode } = useColorMode();
 
-  const handlerSearchMessage = (event) => {
-    setSearchMessage(event.target.value);
-  };
-  const filterData = (search) => {
-    const lowercaseSearch = search.toLowerCase();
-    if (search === "") {
-      setFilteredData(data);
-    } else {
-      const filteredContent = data.filter((item) => {
-        const lowerProductName = item.product_name.toLowerCase();
-        const matchSearch = lowerProductName.includes(lowercaseSearch);
-        if (lowercaseSearch !== "") {
-          return matchSearch;
-        }
-      });
-      setFilteredData(filteredContent);
-    }
-  };
-
-  useEffect(() => {
-    filterData(searchMessage);
-  }, [searchMessage]);
-
   return (
-    <Center h="100%">
+    <Center h="max-content">
       <Box
         bg={useColorModeValue("gray.50", "gray.800")}
         color="blue"
+        overflowX="hidden"
         w="100%"
-        h="90%"
         align="start"
+        my="10"
+        mb={100}
       >
-        <Input
-          type="search"
-          placeholder="Search"
-          color="red"
-          mb={5}
-          ml={20}
-          w="30%"
-          value={searchMessage}
-          onChange={handlerSearchMessage}
-        />
         <Flex align={"end"} justify={"center"}>
           <Accordion
             allowMultiple
@@ -107,12 +73,12 @@ const MainStock = () => {
                     <Image
                       src={item.image}
                       alt={item.product_name}
-                      w="200px"
+                      w="100px"
                       h="100px"
                       objectFit="contain"
                     />
-                    <Box>
-                      <Text fontWeight={700}>Description :</Text>
+                    <Box display="flex" gap={2}>
+                      <Text fontWeight={700}>Description:</Text>
                       <Text>{item.description}</Text>
                     </Box>
                   </AccordionPanel>

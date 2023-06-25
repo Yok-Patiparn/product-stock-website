@@ -1,3 +1,4 @@
+"use client";
 import {
   Box,
   chakra,
@@ -33,10 +34,10 @@ const Logo = (props) => {
 export default function Footer() {
   return (
     <Box
-      w="100vw"
+      w="100%"
       pos="fixed"
       bottom="0"
-      bg={useColorModeValue("gray.50", "gray.900")}
+      bg={useColorModeValue("gray.100", "gray.900")}
       color={useColorModeValue("gray.700", "gray.200")}
     >
       <Container

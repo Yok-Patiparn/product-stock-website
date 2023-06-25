@@ -1,3 +1,4 @@
+"use client";
 import { ReactNode } from "react";
 import {
   Box,
@@ -17,6 +18,7 @@ import {
   Center,
   Input,
 } from "@chakra-ui/react";
+import { HiUser } from "react-icons/hi";
 import { MoonIcon, SunIcon } from "@chakra-ui/icons";
 import CreateNewProduct from "./CreateNewProduct";
 
@@ -35,24 +37,56 @@ const NavLink = ({ children }) => (
   </Link>
 );
 
-export default function NavigationSearch() {
+export default function NavigationSearch({
+  searchMessage,
+  handlerSearchMessage,
+  data,
+  handlerUpdatedData,
+}) {
   const { colorMode, toggleColorMode } = useColorMode();
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <>
-      <Box bg={useColorModeValue("gray.100", "gray.900")} px={4}>
+      <Box
+        bg={useColorModeValue("gray.100", "gray.900")}
+        px={4}
+        position="sticky"
+        top={0}
+        right={0}
+        display="block"
+        w="100%"
+        zIndex={10}
+      >
         <Flex
           w="100%"
           h={16}
           alignItems={"center"}
           justifyContent={"space-between"}
-          pr={5}
+          px={5}
         >
           <Box>Symphony Stock Logo</Box>
 
           <Flex alignItems={"center"}>
-            <Stack direction={"row"} spacing="30px">
-              <CreateNewProduct />
+            <Flex
+              direction={"row"}
+              spacing="30px"
+              alignItems="space-evenly"
+              justifyContent="center"
+              gap={4}
+            >
+              <Input
+                type="search"
+                placeholder="Search"
+                color="red"
+                w="100%"
+                value={searchMessage}
+                onChange={handlerSearchMessage}
+              />
+
+              <CreateNewProduct
+                data={data}
+                handlerUpdatedData={handlerUpdatedData}
+              />
 
               <Button onClick={toggleColorMode}>
                 {colorMode === "light" ? <MoonIcon /> : <SunIcon />}
@@ -66,18 +100,12 @@ export default function NavigationSearch() {
                   cursor={"pointer"}
                   minW={0}
                 >
-                  <Avatar
-                    size={"sm"}
-                    src={"https://avatars.dicebear.com/api/male/username.svg"}
-                  />
+                  <Avatar size={"sm"} src={HiUser} />
                 </MenuButton>
                 <MenuList alignItems={"center"}>
                   <br />
                   <Center>
-                    <Avatar
-                      size={"2xl"}
-                      src={"https://avatars.dicebear.com/api/male/username.svg"}
-                    />
+                    <Avatar src={HiUser} />
                   </Center>
                   <br />
                   <Center>
@@ -93,7 +121,7 @@ export default function NavigationSearch() {
                   </Link>
                 </MenuList>
               </Menu>
-            </Stack>
+            </Flex>
           </Flex>
         </Flex>
       </Box>
