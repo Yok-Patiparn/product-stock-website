@@ -1,4 +1,6 @@
+"use client";
 import React, { ReactNode } from "react";
+import { useRouter } from "next/navigation";
 import {
   IconButton,
   Box,
@@ -14,51 +16,57 @@ import {
   BoxProps,
   FlexProps,
 } from "@chakra-ui/react";
-import {
-  FiHome,
-  FiTrendingUp,
-  FiCompass,
-  FiStar,
-  FiSettings,
-  FiMenu,
-} from "react-icons/fi";
+import { FiHome, FiTruck, FiMenu } from "react-icons/fi";
+import { FaPlus } from "react-icons/fa";
 
 const LinkItems = [
-  { name: "Home", icon: FiHome },
-  { name: "Trending", icon: FiTrendingUp },
-  { name: "Explore", icon: FiCompass },
-  { name: "Favourites", icon: FiStar },
-  { name: "Settings", icon: FiSettings },
+  { name: "Home", icon: FiHome, path: "/" },
+  { name: "Import", icon: FaPlus, path: "/import" },
+  { name: "Export", icon: FiTruck, path: "/export" },
 ];
 
-export default function Sidebar({ children }) {
+export default function Sidebar({ children, handleHomeClick }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const router = useRouter();
+
+  const handleNavLinkClick = (path) => {
+    router.push(path);
+  };
+
   return (
-    <Box>
+    <Box
+      left={0}
+      h="100vh"
+      bg={useColorModeValue("white", "gray.900")}
+      w="min-content"
+    >
       <SidebarContent
         onClose={() => onClose}
-        display={{ base: "none", md: "block" }}
+        onNavLinkClick={handleNavLinkClick}
+        display={{ base: "none", sm: "block" }}
       />
     </Box>
   );
 }
 
-const SidebarContent = ({ onClose, ...rest }) => {
+const SidebarContent = ({ onClose, onNavLinkClick, ...rest }) => {
   return (
     <Box
-      bg={useColorModeValue("white", "gray.900")}
-      borderRight="1px"
-      borderRightColor={useColorModeValue("gray.200", "gray.700")}
       w={{ base: "full", md: 60 }}
-      pos="fixed"
-      h="100%"
+      h="fit-content"
       {...rest}
+      top="50px"
+      pos="fixed"
     >
       <Flex h="20" alignItems="center" mx="8" justifyContent="space-between">
         <CloseButton display={{ base: "flex", md: "none" }} onClick={onClose} />
       </Flex>
       {LinkItems.map((link) => (
-        <NavItem key={link.name} icon={link.icon}>
+        <NavItem
+          key={link.name}
+          icon={link.icon}
+          onClick={() => onNavLinkClick(link.path)}
+        >
           {link.name}
         </NavItem>
       ))}
@@ -77,6 +85,7 @@ const NavItem = ({ icon, children, ...rest }) => {
         align="center"
         p="4"
         mx="4"
+        w="100%"
         borderRadius="lg"
         role="group"
         cursor="pointer"
