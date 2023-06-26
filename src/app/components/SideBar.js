@@ -16,12 +16,13 @@ import {
   BoxProps,
   FlexProps,
 } from "@chakra-ui/react";
-import { FiHome, FiEdit, FiTruck, FiMenu } from "react-icons/fi";
+import { FiHome, FiTruck, FiMenu } from "react-icons/fi";
+import { FaPlus } from "react-icons/fa";
 
 const LinkItems = [
   { name: "Home", icon: FiHome, path: "/" },
-  { name: "Export", icon: FiTruck, path: "/" },
-  { name: "Edit", icon: FiEdit, path: "/" },
+  { name: "Import", icon: FaPlus, path: "/import" },
+  { name: "Export", icon: FiTruck, path: "/export" },
 ];
 
 export default function Sidebar({ children, handleHomeClick }) {
@@ -84,6 +85,7 @@ const NavItem = ({ icon, children, ...rest }) => {
         align="center"
         p="4"
         mx="4"
+        w="100%"
         borderRadius="lg"
         role="group"
         cursor="pointer"

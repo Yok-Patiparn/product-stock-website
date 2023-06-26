@@ -6,7 +6,6 @@ import {
   AccordionItem,
   AccordionButton,
   AccordionPanel,
-  Button,
   Flex,
   useColorModeValue,
   Text,
@@ -21,7 +20,7 @@ import {
 } from "@chakra-ui/react";
 import { ChevronDownIcon } from "@chakra-ui/icons";
 
-const MainStock = ({ filteredData, filterData }) => {
+const ExportStock = ({ filteredData, filterData }) => {
   const { colorMode, toggleColorMode } = useColorMode();
 
   return (
@@ -49,7 +48,7 @@ const MainStock = ({ filteredData, filterData }) => {
             ml={60}
             mb={4}
           >
-            Import
+            Export
           </Badge>
           <Accordion
             allowMultiple
@@ -57,17 +56,29 @@ const MainStock = ({ filteredData, filterData }) => {
             rounded="lg"
             bgColor={colorMode === "light" ? "gray.100" : "white"}
           >
-            <Flex p={4} px={10} bg="gray.200" borderTopRadius={10}>
-              <Text w="15%" textAlign="center" fontWeight={900}>
+            <Flex
+              p={4}
+              px={10}
+              bg="gray.200"
+              borderTopRadius={10}
+              display="flex"
+              direction="row"
+              justifyContent="space-between"
+            >
+              <Text w="10%" textAlign="center" fontWeight={900}>
                 No.
               </Text>
-              <Spacer />
-              <Text w="70%" textAlign="center" fontWeight={900}>
+
+              <Text w="60%" textAlign="center" fontWeight={900}>
                 Product Name
               </Text>
-              <Spacer />
+
               <Text w="15%" textAlign="center" fontWeight={900}>
                 Amount
+              </Text>
+
+              <Text w="15%" textAlign="center" fontWeight={900}>
+                Exported
               </Text>
             </Flex>
 
@@ -76,21 +87,25 @@ const MainStock = ({ filteredData, filterData }) => {
                 <AccordionItem key={index}>
                   <Flex>
                     <AccordionButton
-                      alignItems="start"
-                      justifyContent="start"
                       p={4}
                       px={10}
                       _hover={{ bg: "gray.100" }}
-                      w="100%"
+                      display="flex"
+                      direction="row"
+                      justifyContent="space-between"
                     >
-                      <Text w="15%" fontSize="md">
+                      <Text w="10%" fontSize="md">
                         {item.id}
                       </Text>
-                      <Spacer />
-                      <Text w="70%" fontSize="md">
+
+                      <Text w="60%" fontSize="md">
                         {item.product_name}
                       </Text>
-                      <Spacer />
+
+                      <Text w="15%" fontSize="md">
+                        {item.amount}
+                      </Text>
+
                       <Text w="15%" fontSize="md">
                         {item.amount}
                       </Text>
@@ -119,4 +134,4 @@ const MainStock = ({ filteredData, filterData }) => {
   );
 };
 
-export default MainStock;
+export default ExportStock;

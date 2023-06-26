@@ -17,10 +17,11 @@ import {
 } from "@chakra-ui/react";
 import React, { useState } from "react";
 
-export default function CreateNewProduct({ data, handlerUpdatedData }) {
+export default function ExportedProduct({ data, handlerUpdatedData }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [product, setProduct] = useState("");
   const [amount, setAmount] = useState("");
+  const [minusAmount, setMinusAmount] = useState("");
   const [description, setDescription] = useState("");
   const [image, setImage] = useState(null);
   const initialRef = React.useRef(null);
@@ -30,21 +31,8 @@ export default function CreateNewProduct({ data, handlerUpdatedData }) {
     setProduct(event.target.value);
   };
 
-  const handlerAmountChange = (event) => {
-    setAmount(event.target.value);
-  };
-
-  const handlerDescriptionChange = (event) => {
-    setDescription(event.target.value);
-  };
-
-  const handlerImageChange = (event) => {
-    const file = event.target.files[0];
-    setImage(file);
-  };
-
-  const handlerImageDelete = () => {
-    setImage(null);
+  const handlerMinusAmount = (event) => {
+    setMinusAmount(event.target.value);
   };
 
   const handlerSave = async (event) => {
@@ -52,11 +40,11 @@ export default function CreateNewProduct({ data, handlerUpdatedData }) {
     const newData = {
       id: data.length + 1,
       product_name: product,
-      amount,
+      amount: amount - minusAmount,
       description,
       image,
     };
-    data = [...data, newData];
+    data = [newData];
     handlerUpdatedData(data);
     setProduct("");
     setAmount("");
@@ -68,7 +56,7 @@ export default function CreateNewProduct({ data, handlerUpdatedData }) {
   return (
     <>
       <Button w="70%" onClick={onOpen}>
-        + Create New Product
+        - Export Product
       </Button>
 
       <Modal
@@ -79,7 +67,7 @@ export default function CreateNewProduct({ data, handlerUpdatedData }) {
       >
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Create your new product</ModalHeader>
+          <ModalHeader>Export your product</ModalHeader>
           <ModalCloseButton />
           <ModalBody pb={6}>
             <FormControl>
@@ -96,51 +84,9 @@ export default function CreateNewProduct({ data, handlerUpdatedData }) {
               <FormLabel>Amount</FormLabel>
               <Input
                 placeholder="Amount"
-                value={amount}
-                onChange={handlerAmountChange}
+                value={minusAmount}
+                onChange={handlerMinusAmount}
               />
-            </FormControl>
-            <FormControl mt={4}>
-              <FormLabel>Description</FormLabel>
-              <Input
-                placeholder="Description"
-                value={description}
-                onChange={handlerDescriptionChange}
-              />
-            </FormControl>
-            <FormControl mt={4}>
-              <FormLabel>Image</FormLabel>
-              <Box
-                display="flex"
-                direction="row"
-                justtify="center"
-                alignItems="center"
-              >
-                <Button mr={2} as="label" htmlFor="image-upload">
-                  Choose File
-                  <Input
-                    type="file"
-                    id="image-upload"
-                    style={{ display: "none" }}
-                    onChange={handlerImageChange}
-                  />
-                </Button>
-                {image ? (
-                  <Box>
-                    <Text>{` : ${image.name}`}</Text>
-                    <Button
-                      ml={2}
-                      size="sm"
-                      borderRadius="full"
-                      onClick={handlerImageDelete}
-                    >
-                      x
-                    </Button>
-                  </Box>
-                ) : (
-                  <Text>No file chosen</Text>
-                )}
-              </Box>
             </FormControl>
           </ModalBody>
 

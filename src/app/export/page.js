@@ -9,15 +9,15 @@ import {
 } from "@chakra-ui/react";
 import React, { useState, useEffect } from "react";
 import { ChevronDownIcon } from "@chakra-ui/icons";
-import NavigationSearch from "../components/NavigateSearch";
+import NavigateExport from "../components/NavigateExport";
 import Footer from "../components/Footer";
 import Sidebar from "../components/SideBar";
-import MainStock from "../components/MainStock";
+import ExportStock from "../components/ExportStock";
 import jsonData from "./jsonData";
 
 export default function Stock() {
   const [searchMessage, setSearchMessage] = useState("");
-  const [filteredData, setFilteredData] = useState(jsonData);
+  const [filteredData, setFilteredData] = useState([]);
   const [data, setData] = useState(jsonData);
 
   const { colorMode, toggleColorMode } = useColorMode();
@@ -46,9 +46,7 @@ export default function Stock() {
     }
   };
 
-  useEffect(() => {
-    filterData(searchMessage);
-  }, [searchMessage]);
+
 
   const handleHomeClick = () => {
     router.push("/");
@@ -56,7 +54,7 @@ export default function Stock() {
 
   return (
     <Box w="100%" height="90vh" overflowY="hidden">
-      <NavigationSearch
+      <NavigateExport
         filteredData={filteredData}
         filterData={filterData}
         seachMessage={searchMessage}
@@ -67,7 +65,7 @@ export default function Stock() {
       <SimpleGrid
         display="grid"
         columns="2"
-        gridTemplateColumns="0.9fr 3.9fr"
+        gridTemplateColumns="0.7fr 4.1fr"
         bg={useColorModeValue("gray.50", "gray.800")}
         w="100%"
         h="max-content"
@@ -82,10 +80,10 @@ export default function Stock() {
           borderLeftColor={useColorModeValue("gray.200", "gray.700")}
           overflowY="scroll"
         >
-          {/* need render logic */}
-          <MainStock filteredData={filteredData} filterData={filterData} />
+          <ExportStock filteredData={filteredData} filterData={filterData} />
         </Box>
       </SimpleGrid>
+
       <Footer />
     </Box>
   );

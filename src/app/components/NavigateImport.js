@@ -21,6 +21,7 @@ import {
 import { HiUser } from "react-icons/hi";
 import { MoonIcon, SunIcon } from "@chakra-ui/icons";
 import CreateNewProduct from "./CreateNewProduct";
+import ExportedProduct from "./ExportedProduct";
 
 const NavLink = ({ children }) => (
   <Link
@@ -37,7 +38,7 @@ const NavLink = ({ children }) => (
   </Link>
 );
 
-export default function NavigationSearch({
+export default function NavigationImport({
   searchMessage,
   handlerSearchMessage,
   data,
@@ -113,7 +114,7 @@ export default function NavigationSearch({
                   </Center>
                   <br />
                   <MenuDivider />
-                  <Link href="/stock">
+                  <Link href="/import">
                     <MenuItem>Your Stock</MenuItem>
                   </Link>
                   <Link href="/">

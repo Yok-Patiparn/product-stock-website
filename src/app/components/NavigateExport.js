@@ -1,6 +1,5 @@
 "use client";
-
-import React, { ReactNode } from "react";
+import { ReactNode } from "react";
 import {
   Box,
   Flex,
@@ -17,10 +16,12 @@ import {
   Stack,
   useColorMode,
   Center,
-  Text,
+  Input,
 } from "@chakra-ui/react";
 import { HiUser } from "react-icons/hi";
 import { MoonIcon, SunIcon } from "@chakra-ui/icons";
+import CreateNewProduct from "./CreateNewProduct";
+import ExportedProduct from "./ExportedProduct";
 
 const NavLink = ({ children }) => (
   <Link
@@ -37,22 +38,57 @@ const NavLink = ({ children }) => (
   </Link>
 );
 
-export default function NavigationBar() {
+export default function NavigationExport({
+  searchMessage,
+  handlerSearchMessage,
+  data,
+  handlerUpdatedData,
+}) {
   const { colorMode, toggleColorMode } = useColorMode();
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <>
-      <Box bg={useColorModeValue("gray.100", "gray.900")} px={4}>
+      <Box
+        bg={useColorModeValue("gray.100", "gray.900")}
+        px={4}
+        position="sticky"
+        top={0}
+        right={0}
+        display="block"
+        w="100%"
+        zIndex={10}
+      >
         <Flex
           w="100%"
           h={16}
           alignItems={"center"}
           justifyContent={"space-between"}
+          px={5}
         >
           <Box>Symphony Stock Logo</Box>
 
           <Flex alignItems={"center"}>
-            <Stack direction={"row"} spacing={7}>
+            <Flex
+              direction={"row"}
+              spacing="30px"
+              alignItems="space-evenly"
+              justifyContent="center"
+              gap={4}
+            >
+              <Input
+                type="search"
+                placeholder="Search"
+                color="red"
+                w="100%"
+                value={searchMessage}
+                onChange={handlerSearchMessage}
+              />
+
+              <ExportedProduct
+                data={data}
+                handlerUpdatedData={handlerUpdatedData}
+              />
+
               <Button onClick={toggleColorMode}>
                 {colorMode === "light" ? <MoonIcon /> : <SunIcon />}
               </Button>
@@ -74,7 +110,7 @@ export default function NavigationBar() {
                   </Center>
                   <br />
                   <Center>
-                    <Text>Username</Text>
+                    <p>Username</p>
                   </Center>
                   <br />
                   <MenuDivider />
@@ -86,7 +122,7 @@ export default function NavigationBar() {
                   </Link>
                 </MenuList>
               </Menu>
-            </Stack>
+            </Flex>
           </Flex>
         </Flex>
       </Box>

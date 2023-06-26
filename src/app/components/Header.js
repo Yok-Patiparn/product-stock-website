@@ -54,7 +54,7 @@ export default function CallToActionWithAnnotation() {
             alignSelf={"center"}
             position={"relative"}
           >
-            <Link href="/stock">
+            <Link href="/import">
               <Button
                 bg={"green.500"}
                 color={colorMode === "light" ? "gray.700" : "white"}
